@@ -1,0 +1,100 @@
+{
+ "data": {},
+"elements": {
+ "nodes": [
+ {
+ "data": {
+ "name": "A",
+"id": "A" 
+} 
+},
+{
+ "data": {
+ "name": "B",
+"id": "B" 
+} 
+},
+{
+ "data": {
+ "name": "C",
+"id": "C" 
+} 
+},
+{
+ "data": {
+ "name": "D",
+"id": "D" 
+} 
+},
+{
+ "data": {
+ "name": "E",
+"id": "E" 
+} 
+},
+{
+ "data": {
+ "name": "X",
+"id": "X" 
+} 
+},
+{
+ "data": {
+ "name": "Y",
+"id": "Y" 
+} 
+} 
+],
+"edges": [
+ {
+ "data": {
+ "source": "A",
+"target": "B",
+"weight":      2 
+} 
+},
+{
+ "data": {
+ "source": "B",
+"target": "C",
+"weight":      3 
+} 
+},
+{
+ "data": {
+ "source": "C",
+"target": "D",
+"weight":      7 
+} 
+},
+{
+ "data": {
+ "source": "D",
+"target": "E",
+"weight":      1 
+} 
+},
+{
+ "data": {
+ "source": "B",
+"target": "E",
+"weight":      3 
+} 
+},
+{
+ "data": {
+ "source": "D",
+"target": "E",
+"weight":      2 
+} 
+},
+{
+ "data": {
+ "source": "X",
+"target": "Y",
+"weight":      7 
+} 
+} 
+] 
+} 
+}
