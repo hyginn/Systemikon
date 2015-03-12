@@ -1,0 +1,1 @@
+<string:gene>        <string:gene>        <float:value>
