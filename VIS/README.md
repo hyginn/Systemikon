@@ -1,8 +1,5 @@
-# Systemikon
-Systemikon: a systems discovery workflow - this is the University of Toronto BCB420/JTB2020 joint class project for 2015.
-
-# Visualization
-The Visualization component of the Systemikon project.
+# Systemikon/VIS
+This folder contains the network and hierarchy visualization component of the Systemikon project.
 
 # Introduction
 The Visualization uses R to convert a tabular formatted input file into JSON which is then visualized using Cytoscape.
