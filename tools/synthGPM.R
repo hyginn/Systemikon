@@ -1,6 +1,6 @@
 # synthGPM
 # synthetic Gene-Pair Multigraph from first principles
-# V 0.1
+# V 0.1.1
 # B. Steipe, March 2015
 #
 # This code synthesizes random Gene-pair multigraphs from
@@ -12,10 +12,12 @@
 # of system sizes that corresponds to Zipf's law.
 #
 # This does not create hierarchical systems.
+# 
+# Added output option to write numeric gene IDs and system IDs.
 # =====================
 
-nGenes <- 200   # Number of genes
-nSystems <- 10  # Number of Systems
+nGenes <- 100   # Number of genes
+nSystems <- 5  # Number of Systems
 
 trackNames <- c("")
 trackNames[1] <- "iRef"
@@ -229,6 +231,8 @@ for (i in 1:nSystems) {
 
 # You'll have to write this to file, rather than to console ....
 
+# Plain output:
+# Tab delimited: gene A label, gene B label, 4 tracks
 for (pair in 1:nrow(genePairs)) {
 	cat(geneLabels[as.numeric(genePairs[pair, "geneA"])])
 	cat("\t")
@@ -240,8 +244,22 @@ for (pair in 1:nrow(genePairs)) {
 	cat("\n")
 }
 
-
-
+# Simple output with system IDs:
+# Tab delimited: gene A index, gene B index, 1 track, System index A, System index B
+for (pair in 1:nrow(genePairs)) {
+	A <- as.integer(genePairs[pair, "geneA"])
+	B <- as.integer(genePairs[pair, "geneB"])
+	cat(A)
+	cat("\t")
+	cat(B)
+	cat("\t")
+	cat(genePairs[pair, trackNames[1]]) # use first track value only
+	cat("\t")
+	cat(geneSys[A])
+	cat("\t")
+	cat(geneSys[B])
+	cat("\n")
+}
 
 
 # [Done]
