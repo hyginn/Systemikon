@@ -1,8 +1,12 @@
+###Gene Ontology Semantic Similarity###
+#R script by: Wilfred de Vega
+#Version 2.0 - March 17, 2015
+
+LoGtable <- read.table("listofgenes.txt", sep = "\t", header = TRUE) #this will come from List of Genes
+
 library(GOSemSim) #loads GOSemSim package
 
-listofgenes <- "samplelist.txt" #obtain list of Entrez IDs (will be modified once List of Genes format is determined)
-genetable <- read.table(listofgenes, sep = "\t", header = TRUE) #organize list of genes into table
-genecombo <- t(combn(genetable[,1], m = 2)) #obtain every possible combination of 2 genes. Transpose the matrix to make it easier to read.
+genecombo <- t(combn(LoGtable[,"Entrez.ID"], m = 2)) #obtain every possible combination of 2 genes (Entrez ID only). Transpose the matrix to make it easier to read.
 colnames(genecombo)[1:2] <- c("Gene 1", "Gene 2") #Rename the first two columns for clarity
 
 CCscore <- apply(genecombo, 1, function(x){ #Calculate CC GO Semantic Similarity Scores over each row (1) of the matrix
