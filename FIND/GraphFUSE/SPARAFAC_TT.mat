@@ -114,5 +114,5 @@ while Diff>convcrit && it<maxit
         end
     end
 end
-B = sparse(B);
+B = sparse(A);
 end
