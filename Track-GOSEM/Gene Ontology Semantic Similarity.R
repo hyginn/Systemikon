@@ -4,7 +4,12 @@
 
 LoGtable <- read.table("listofgenes.txt", sep = "\t", header = TRUE) #this will come from List of Genes
 
-library(GOSemSim) #loads GOSemSim package
+# Load the GOSemSim library, or download it if not available.
+# Will also download the 27.5 Mb dependency "GO.db" if not available
+if (! require(GOSemSim)) {
+	source("http://bioconductor.org/biocLite.R")
+	biocLite("GOSemSim")
+}
 
 genecombo <- t(combn(LoGtable[,"Entrez.ID"], m = 2)) #obtain every possible combination of 2 genes (Entrez ID only). Transpose the matrix to make it easier to read.
 colnames(genecombo)[1:2] <- c("GeneA", "GeneB") #Rename the first two columns for clarity
