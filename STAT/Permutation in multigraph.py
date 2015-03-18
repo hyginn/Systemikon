@@ -48,7 +48,7 @@ while t<y:
                 
                 j=j+1
                 #Control option
-                if j>y*10:
+                if j>y*4:
                     break
                 
                 
@@ -105,7 +105,7 @@ while t<y:
 ##            print (e3[0],d)
 
 #begin next swap if the program can't find any matched edges
-            if i>y*10:
+            if i>y*4:
                 break
                 
             print i
