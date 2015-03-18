@@ -7,7 +7,7 @@ LoGtable <- read.table("listofgenes.txt", sep = "\t", header = TRUE) #this will 
 library(GOSemSim) #loads GOSemSim package
 
 genecombo <- t(combn(LoGtable[,"Entrez.ID"], m = 2)) #obtain every possible combination of 2 genes (Entrez ID only). Transpose the matrix to make it easier to read.
-colnames(genecombo)[1:2] <- c("Gene 1", "Gene 2") #Rename the first two columns for clarity
+colnames(genecombo)[1:2] <- c("GeneA", "GeneB") #Rename the first two columns for clarity
 
 CCscore <- apply(genecombo, 1, function(x){ #Calculate CC GO Semantic Similarity Scores over each row (1) of the matrix
   CCSemSim <- geneSim(x[1], x[2], ont = "CC", organism = "human", measure = "Rel", combine = "BMA") #should return a vector of 3 elements
