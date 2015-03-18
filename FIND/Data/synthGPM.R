@@ -12,7 +12,7 @@ trackNames[2] <- "GEO"
 trackNames[3] <- "GO"
 trackNames[4] <- "pathW"
 
-pWithin <- 0.8
+pWithin <- 0.2
 # Probability that a gene pair within a system
 # shares an edge. The minimum should be calculated
 # from Erdös-Rényi theory so as to ensure that
@@ -48,7 +48,7 @@ pBetween <- ((1 - pWithin) * meanDegree * nGenes) /
 baseWeight <- 0.8  # The basic weight for all tracks
 baseSpread <- 2    # The spread for an Edge-tuple weight
 betweenTracksSpread <- 2
-threshold <- 0.5
+threshold <- 0.1
 # Weights are determined by computing a probability for
 # a tuple from baseWeight and baseSpread, then using this 
 # probability as a basis, producing a random weight for each
@@ -230,8 +230,8 @@ for (pair in 1:nrow(genePairs)) {
 }
 
 
-
-
+write.table(geneSys, "C:/Users/Naveen/Documents/GitHub/Systemikon/geneSys-thresh0.1-pwithin0.1.txt", sep=",")
+write.table(genePairs, "C:/Users/Naveen/Documents/GitHub/Systemikon/genePairs-thresh0.1-pwithin0.1.txt.txt", sep=",")
 
 # [Done]
 
