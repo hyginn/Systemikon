@@ -5,7 +5,7 @@ function [A B C cost]=SPARAFAC_TT(X,F,lambda)
 
 % SMALLNUMBER = 10^8*eps;
 SMALLNUMBER=10^-4;
-MAXNUMITER = 20;
+MAXNUMITER = 30;
 
 s = size(X); I=s(1);J=s(2);K=s(3);
 
