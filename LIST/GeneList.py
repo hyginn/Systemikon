@@ -1,4 +1,4 @@
-import mygene, mechanize, urllib
+import mygene, urllib
 
 inputfile = open('input', 'r')
 
