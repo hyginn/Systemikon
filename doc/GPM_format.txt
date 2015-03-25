@@ -1,1 +1,2 @@
+"Gene 1","Gene 2","Track", "Score"
 <string:gene>        <string:gene>        <int:track>        <float:value>
