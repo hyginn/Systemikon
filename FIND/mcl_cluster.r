@@ -60,7 +60,8 @@ for (i in 1:length(data[,1])){
 for (i in 1:length(data[,1])){
   node1 <- data[i,1]
   node2 <- data[i,2]
-  adjacency_vector[(node1-1)*10 + node2] = data[i,3]
+  adjacency_vector[(node1-1)*size + node2] = data[i,3]
+  adjacency_vector[(node2-1)*size + node1] = data[i,3]
 }
 
 adjacency <- matrix(adjacency_vector, byrow=TRUE, nrow=size)
