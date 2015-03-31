@@ -1,4 +1,4 @@
-import urllib, xml.etree.ElementTree as ET
+import urllib2, json
 
 inputfile = open('input.txt', 'r')
 
@@ -12,8 +12,10 @@ for line in inputfile:
     if x == 0:
         runID = line.strip('\n')
     elif x == 1:
-        if line == "Fetch\n":
-            #Fetch genes from authorative gene source.
+        if line == "Genome\n":
+            #genomefile = open('HumanGenome.txt', 'r')
+            #for gene in genomefile:
+                #genelist += [line.strip('\n')]
             break
         else:
             x += 1
@@ -30,28 +32,38 @@ y = 0
 for gene in genelist:
     commas += gene + ","
 
-normalize = "http://biodbnet.abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi?method=dbfind&inputValues={!s}&output=geneid&taxonId=9606&format=row".format(commas)
+normalize = "http://biodbnet.abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.json?method=dbfind&inputValues={!s}&output=geneid&taxonId=9606&format=row".format(commas)
 
-openurl = urllib.urlopen(normalize)
+text = urllib2.urlopen(normalize).read()
 
-response = openurl.read()
+text = json.loads(text)
 
-print response
+print text
 
-xml = ET.fromstring(response)
+#xml = ET.fromstring(text)
 
-print response
-
-print xml[0][1].text
+#print text[0]["Gene ID"]
 
 commas2 = ""
 
-for gene in xml.text:
-    commas2 += gene[3] + ","
+for gene in text:
+    commas2 += gene["Gene ID"] + ","
 
 print commas2
     
 
-#convert = "http://biodbnet.abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.xml?method=db2db&format=row&input=genesymbol&inputValues=MYC,MTOR&outputs=biocycid,genesymbol&taxonId=9606".format(
+convert = "http://biodbnet.abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.json?method=db2db&format=row&input=genesymbol&inputValues={!s}&outputs=biocycid,genesymbol&taxonId=9606".format(commas2)
 
-#outputfile = open("output.txt", 'w')
+conversions = urllib2.urlopen(convert).read()
+
+conversions = json.loads(conversions)
+
+#print conversions
+
+finallist = ""
+
+for gene in conversions:
+    finallist += (gene["BioCyc ID"] + "  " + gene["Gene Symbol"] + "\n")
+
+with open("output.txt", 'w') as thefile:
+    thefile.write(finallist)
