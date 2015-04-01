@@ -1,6 +1,26 @@
-###Gene Ontology Semantic Similarity###
-#R script by: Wilfred de Vega
-#Version 2.0 - March 17, 2015
+# Gene Ontology Semnatic Similarity.R
+# Calculate pairwise Gene Ontology semantic similarity score based on Schlicker's method
+# V 0.3
+# Wilfred de Vega, April 1, 2015
+#
+# Semantic similarity scores, based on Schlicker's method, are calculated based on
+# Cellular Component and Biological Pathway Gene Ontology terms. This track requires
+# a list of genes and determine pairwise scores. The average of the two scores will be
+# calculated and gene pairs with a score higher than 0.2 will be in the final output.
+#
+# Input:      List of Genes
+# Output:     Average pairwise semantic similarity scores higher than 0.2
+# Parameters: Entrez IDs are required for the genes and a Gene Ontology must exist for
+# the species of interest.
+#
+# Notes:
+#
+#
+# Issues / ToDo:
+# Determine a more efficient way to calculate scores (currently, this track will process
+# a list of 100 genes in 6 minutes with 8GB RAM).
+#
+# =====================
 
 LoGtable <- read.table("listofgenes.txt", sep = "\t", header = TRUE) #this will come from List of Genes
 
