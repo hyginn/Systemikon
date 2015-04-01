@@ -1,32 +1,37 @@
 library(MCL)
 library(igraph)
 
-#This function takes in a file address and returns the normalied data
-#contains the data frames
-#The normalization of this 
+# This function takes in a file address and returns the normalied data
+# Contains the data frames
+# The normalization used in this function utilizes the emprical cumulative distrubution function method
+# The reason for this normalization is to address the fact that multiple tracks can have scores within different ranges
+# The normalization resolves this problem and provides further ground for further graph fusion
+
 normalize <- function(address){
 
-  data <- read.table(address,header=TRUE, sep=" ")
+  data <- read.table(address,header=TRUE, sep=" ") # Reads the innput file 
 
-  empirical_cdf1 <- ecdf(data[,3]) 
-  empirical_cdf2 <- ecdf(data[,4])
-  empirical_cdf3 <- ecdf(data[,5])
-  empirical_cdf4 <- ecdf(data[,6])
+  empirical_cdf1 <- ecdf(data[,3]) # Find the empircal cumulative distrubution function for track1
+  empirical_cdf2 <- ecdf(data[,4]) # Find the empircal cumulative distrubution function for track2
+  empirical_cdf3 <- ecdf(data[,5]) # Find the emprical cumulative distrubution function for track3
+  empirical_cdf4 <- ecdf(data[,6]) # Find the empircal cumulative distrubution function for track4
 
-  data[3] <- lapply(data[3],empirical_cdf1)
-  data[4] <- lapply(data[4],empirical_cdf2)
-  data[5] <- lapply(data[5],empirical_cdf3)
-  data[6] <- lapply(data[6],empirical_cdf4)
+  data[3] <- lapply(data[3],empirical_cdf1) # Apply the ecdf to track 1 
+  data[4] <- lapply(data[4],empirical_cdf2) # Apply the ecdf for track 2
+  data[5] <- lapply(data[5],empirical_cdf3) # Apply the ecdf for track 3
+  data[6] <- lapply(data[6],empirical_cdf4) # Apply the ecdf for track 4
   
-  return(data)
+  return(data) # returns the data
 
 }
 
-#This function fuses the graphs together based on the shannon entropy
+# This function fuses the graphs together based on the Shannon entropy
+# The reason for this fusion method is to address how consistant is the gene pair interaction scoe across different tracks
+# This also addresses the fact that if one of the track has a high score, the shannon will be low, hance the association is high
 
 fusion <- function(data, size){
   answer <- data.frame(gene_id1 = numeric(size), gene_id2 = numeric(size),
-                       edge_weight = numeric(size))
+                       edge_weight = numeric(size)) 
   for (i in 1:size){
     answer[i,1] <- data[i,1]
     answer[i,2] <- data[i,2]
@@ -41,8 +46,8 @@ fusion <- function(data, size){
 normalized_table <- normalize("sample1.txt")
 data <- fusion(normalized_table, nrow(normalized_table))
 
-all_names <- unique(c(data[,1], data[,2]))
-adjacency_vector <- numeric(length(all_names)^2)
+all_names <- unique(c(data[,1], data[,2])) # Obtain all unique names of the given gene ids
+adjacency_vector <- numeric(length(all_names)^2) # Initializing the adjancy_vector
 
 size = length(all_names)
 
