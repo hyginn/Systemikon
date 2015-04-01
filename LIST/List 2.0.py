@@ -52,7 +52,7 @@ for gene in text:
 print commas2
     
 
-convert = "http://biodbnet.abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.json?method=db2db&format=row&input=genesymbol&inputValues={!s}&outputs=biocycid,genesymbol&taxonId=9606".format(commas2)
+convert = "http://biodbnet.abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.json?method=db2db&format=row&input=genesymbol&inputValues={!s}&outputs=kegggeneid,genesymbol&taxonId=9606".format(commas2)
 
 conversions = urllib2.urlopen(convert).read()
 
@@ -63,7 +63,7 @@ conversions = json.loads(conversions)
 finallist = ""
 
 for gene in conversions:
-    finallist += (gene["BioCyc ID"] + "  " + gene["Gene Symbol"] + "\n")
+    finallist += (gene["KEGG Gene ID"] + "  " + gene["Gene Symbol"] + "\n")
 
 with open("output.txt", 'w') as thefile:
     thefile.write(finallist)
