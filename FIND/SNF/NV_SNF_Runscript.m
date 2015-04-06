@@ -1,3 +1,7 @@
+%% This is a runscript to run SNF and test things out. 
+% It is not recommended to use this unless you have a good understanding of the code
+% Please use SNFpermutation instead, with pWithinSearch runscript
+
 clc
 clear
 close all
