@@ -48,7 +48,7 @@ while t<y:
                 
                 j=j+1
                 #Control option
-                if j>y*10:
+                if j>y*4:
                     break
                 
                 
@@ -96,7 +96,7 @@ while t<y:
             c=random.randint(0,len(n.edges())-1)
             e3=n.edges()[c]
             e3w=n[e3[0]][e3[1]]['weight']
-            d=random.randint(n.nodes()[0],n.nodes()[-1])
+            d=random.choice(n.nodes())
             counter=counter+1
             i=i+1
             
@@ -105,7 +105,7 @@ while t<y:
 ##            print (e3[0],d)
 
 #begin next swap if the program can't find any matched edges
-            if i>y*10:
+            if i>y*4:
                 break
                 
             print i
@@ -115,7 +115,7 @@ while t<y:
 ##                print (e3[0],d),(d,e3[0])
                 
                 
-                e=random.randint(n.nodes()[0],n.nodes()[-1])
+                e=random.choice(n.nodes())
 ##                print (e3[1],e)
                 if (e3[1],e) in n.edges() or (e,e3[1])in n.edges():
                     e5w=n[e3[1]][e]['weight']

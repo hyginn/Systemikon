@@ -1,13 +1,38 @@
-###Gene Ontology Semantic Similarity###
-#R script by: Wilfred de Vega
-#Version 2.0 - March 17, 2015
+# Gene Ontology Semnatic Similarity.R
+# Calculate pairwise Gene Ontology semantic similarity score based on Schlicker's method
+# V 0.3
+# Wilfred de Vega, April 1, 2015
+#
+# Semantic similarity scores, based on Schlicker's method, are calculated based on
+# Cellular Component and Biological Pathway Gene Ontology terms. This track requires
+# a list of genes and determine pairwise scores. The average of the two scores will be
+# calculated and gene pairs with a score higher than 0.2 will be in the final output.
+#
+# Input:      List of Genes
+# Output:     Average pairwise semantic similarity scores higher than 0.2
+# Parameters: Entrez IDs are required for the genes and a Gene Ontology must exist for
+# the species of interest.
+#
+# Notes:
+#
+#
+# Issues / ToDo:
+# Determine a more efficient way to calculate scores (currently, this track will process
+# a list of 100 genes in 6 minutes with 8GB RAM).
+#
+# =====================
 
 LoGtable <- read.table("listofgenes.txt", sep = "\t", header = TRUE) #this will come from List of Genes
 
-library(GOSemSim) #loads GOSemSim package
+# Load the GOSemSim library, or download it if not available.
+# Will also download the 27.5 Mb dependency "GO.db" if not available
+if (! require(GOSemSim)) {
+	source("http://bioconductor.org/biocLite.R")
+	biocLite("GOSemSim")
+}
 
 genecombo <- t(combn(LoGtable[,"Entrez.ID"], m = 2)) #obtain every possible combination of 2 genes (Entrez ID only). Transpose the matrix to make it easier to read.
-colnames(genecombo)[1:2] <- c("Gene 1", "Gene 2") #Rename the first two columns for clarity
+colnames(genecombo)[1:2] <- c("GeneA", "GeneB") #Rename the first two columns for clarity
 
 CCscore <- apply(genecombo, 1, function(x){ #Calculate CC GO Semantic Similarity Scores over each row (1) of the matrix
   CCSemSim <- geneSim(x[1], x[2], ont = "CC", organism = "human", measure = "Rel", combine = "BMA") #should return a vector of 3 elements
