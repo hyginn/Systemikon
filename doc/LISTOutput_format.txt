@@ -1,0 +1,4 @@
+“KEGG Gene ID Gene 001"	"GeneSymbol Gene 001"
+"KEGG Gene ID Gene 002"	"GeneSymbol Gene 002"
+"KEGG Gene ID Gene 003"	"GeneSymbol Gene 003"
+etc...

@@ -1,0 +1,31 @@
+###Systemikon Track-GOSEM Documentation
+Wilfred de Vega
+April 7, 2015
+
+#Script: Gene Ontology Semantic Similarity.R (V 0.3)
+This particular track will calculate Gene Ontology (GO) pairwise semantic similarity scores for a desired list of genes
+and output significant pairs of genes (ie. those deemed to be semantically similar). The calculation of scores are based
+on the Cellular Component and Biological Process GO terms and uses Schlicker and colleagues' Relevance method to determine
+scores. Cellular Component and Biological Process GO terms are only considered for our analysis the Molecular Function terms
+will likely be non-informative for our analysis and genes that participate in the same system will likely have different
+molecular functions. This track relies on the GOSemSim package by Yu and colleagues, which is available in Bioconductor.
+
+#Requirements
+-List of Genes and their Entrez IDs (provided by previous track)
+-R (this script is guaranteed to work in R version 3.1.2)
+-GOSemSim
+-Gene Ontology must exist for species of interest
+
+#Description of Code
+1. If the user does not have GOSemSim installed, the code will execute commands to install the package (and its other dependencies) 
+on your system. Otherwise, the script will load the GOSemSim library to R.
+2. From the list of genes, every possible pair combination will be generated and assembled in a table of two columns labelled
+as "GeneA" and "GeneB".
+3. Semantic similarity scores are calculated based on the Cellular Component and Biological Process categories using GOSemSim's
+geneSim function.
+4. Scores are appended onto the gene pair table and averages are calculated.
+5. A final table is produced of gene pairs with an average semantic similarity score > 0.2. Their Entrez IDs and scores are provided.
+
+#Issues
+Currently, this code can process a gene list with 100 members in 6 minutes with 8 GB of RAM. More efficient methods of calculating
+the scores should be developed as the pipeline will likely be used for gene lists much larger than this sample size.
