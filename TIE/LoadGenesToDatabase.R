@@ -21,19 +21,17 @@ con <- dbConnect(drv,
                  port='[INSERT PORT HERE]')
 
 ## Name of genes file
-fileName <- 'listofgenes.txt' 
+fileName <- 'synthetic_LoG.csv' 
 
 ## Add genes to genes table in systemikon database
-data <- read.table(fileName, sep='\t', header=TRUE)
+data <- read.table(fileName, sep=',', header=TRUE)
 
 apply(data, 1, function(row) {
-  entrezID <- row["Entrez.ID"]
-  symbolID <- row["Symbol.ID"]
-  description <- row["Description"]
+  geneID <- row["Gene.Id"]
+  symbolID <- row["Symbol"]
   query <- paste('INSERT INTO genes VALUES (', 
-                 paste(entrezID, ',', sep=''), 
-                 paste('\'', symbolID, '\'', ',', sep=''), 
-                 paste('\'', description, '\'', sep=''), 
+                 paste(geneID, ',', sep=''), 
+                 paste('\'', symbolID, '\'', sep=''),
                  ');'
                  )
   dbSendQuery(con, query)
