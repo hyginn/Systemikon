@@ -11,6 +11,13 @@ The visualization framework reads a csv file and imports it as a graph into d3.j
 #d3.v2.js
 The source file for d3.js. For more info visit http://d3js.org.
 
+Why d3?
+- Easy to use.
+- Works well with large-ish datasets.
+- Scriptable
+- Platform independent
+- Pretty
+
 #edges9.csv and links.csv
 Sample input file(s) for edges.
 The input is essentially an edgelist with three comma separated columns:
