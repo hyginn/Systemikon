@@ -8,8 +8,8 @@ library(RPostgreSQL)
 drv <- dbDriver("PostgreSQL")
 
 ## User information
-username <- 'postgres'
-password <- 'postgres'
+username <- '[INSERT USERNAME HERE]'
+password <- '[INSERT PASSWORD HERE]'
 dbname <- 'systemikon'
 
 ## Connect to the database
@@ -17,8 +17,8 @@ con <- dbConnect(drv,
                  dbname=dbname,
                  user=username,
                  password=password,
-                 host='localhost',
-                 port='5432')
+                 host='[INSERT HOST HERE]',
+                 port='[INSERT PORT HERE]')
 
 # Add 4 tracks to database
 dbSendQuery(con, 'INSERT INTO tracks VALUES(\'INTERACT\', \'protein-protein interaction pairscores\');')
