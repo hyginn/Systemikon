@@ -16,6 +16,8 @@ Why d3?
 - Works well with large-ish datasets.
 - Scriptable
 - Platform independent
+- Graphs are interactive
+- SVG based visualization offers infinite zoom (can be modified to use canvas graphics - supposedly provides better performance)
 - Pretty
 
 #edges9.csv and links.csv
