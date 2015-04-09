@@ -43,6 +43,28 @@ fusion <- function(data, size){
   return (answer)
 }
 
+# This function takes the ouput of the MCL function and writes the data into a file of user's choice
+# data: The output put of the MCL function
+# address: The string which represents the address of the file where the output should go
+#          If full path is not specified, then the file will be created in the current working directory
+
+write_results <- function(data, address){
+  
+  clusters = data$Cluster # Obtain the cluster data from the data fram output from the mcl function
+  size <- length(clusters) # Obtain the total number of genes
+  
+  data <- data.frame(gene_id = numeric(size), cluster_number=numeric(size)) # Initialize the data frame
+  
+  # Populate the data frame which the data from the clusters
+  for (i in 1:length(size)){
+    data[i,1] = i
+    data[i,2] = clusters[i]
+  }
+  
+  write.table(d, address) # Write the output
+  
+}
+
 normalized_table <- normalize("sample1.txt")
 data <- fusion(normalized_table, nrow(normalized_table))
 
@@ -71,3 +93,4 @@ for (i in 1:length(data[,1])){
 
 adjacency <- matrix(adjacency_vector, byrow=TRUE, nrow=size)
 clusters <- mcl(adjacency, addLoops=TRUE)
+write_results(clusters, "sample_output.txt")
