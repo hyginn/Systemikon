@@ -37,7 +37,6 @@ fusion <- function(data, size){
     answer[i,2] <- data[i,2]
     
     num <- c(data[i,3], data[i,4], data[i,5], data[i,6])
-    num <- num/sum(num)
     answer[i,3] <- -sum(num*log2(num))
   }
   return (answer)
@@ -92,5 +91,5 @@ for (i in 1:length(data[,1])){
 }
 
 adjacency <- matrix(adjacency_vector, byrow=TRUE, nrow=size)
-clusters <- mcl(adjacency, addLoops=TRUE)
+clusters <- mcl(adjacency, expansion = 2.5, inflation = 1.75, addLoops=TRUE)
 write_results(clusters, "sample_output.txt")
