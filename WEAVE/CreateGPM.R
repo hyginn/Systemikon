@@ -8,16 +8,17 @@ library(RPostgreSQL)
 drv <- dbDriver("PostgreSQL")
 
 ## User information
-username <- 'postgres' # (??)
-password <- 'postgres' # Change this
+username <- '[INSERT USERNAME HERE]'
+password <- '[INSERT PASSWORD HERE]'
 dbname <- 'systemikon'
 
+## Connect to the database
 con <- dbConnect(drv,
                  dbname=dbname,
                  user=username,
                  password=password,
-                 host='localhost', # change this
-                 port='5432') # change this
+                 host='[INSERT HOST HERE]',
+                 port='[INSERT PORT HERE]')
 
 # Get the result set
 rs <- dbSendQuery(con, 'SELECT * FROM gene_pairs;')
@@ -25,7 +26,7 @@ rs <- dbSendQuery(con, 'SELECT * FROM gene_pairs;')
 ## fetch all elements from the result set
 genePairs <- fetch(rs,n=-1)
 
-GPM <- 
+GPM <- data.frame(pid=integer(0), score=numeric(0), track=character(0), version=character(0))
 
 apply(genePairs, 1, function(row) {
   pairId <- row["pid"]
@@ -35,9 +36,11 @@ apply(genePairs, 1, function(row) {
                                  pairId, ' AND track = \'', trackSymbol, '\';', 
                                  sep=''))
     scores <- fetch(rs, n=-1)
-    print(scores)
+    GPM <- rbind(GPM, scores)
   })
 })
+
+write.table(GPM, file='synthetic_GPM.csv', sep=',')
 
 # Free up resources used by result set
 for (rs in dbListResults(con)) {
