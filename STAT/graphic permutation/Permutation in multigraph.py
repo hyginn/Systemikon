@@ -4,7 +4,7 @@ import math as math
 import random
 
 #Input the local path of text file and input how many swapping you like to do
-x=raw_input("Please enter the input text path(example:F:/study/university life/BIOINFO/bcb420/testfile.txt):")
+x=raw_input("Please enter the input text path(example:F:/study/university life/BIOINFO/bcb420/testfile (2).txt):")
 y=input("Please enter a number indicates how many swapping you like to do:")
 
 
@@ -20,7 +20,7 @@ while t<y:
     #random generating a number to decide which swapping we are doing
     #And select 3 edges from the database
     z=random.uniform(0.0,1.0)
-    
+##    print z
     i=0
     j=0
     
@@ -48,7 +48,7 @@ while t<y:
                 
                 j=j+1
                 #Control option
-                if j>y*4:
+                if j>y*10:
                     break
                 
                 
@@ -66,18 +66,18 @@ while t<y:
                 
                             
                             n.add_edge(e1[0],e2[1],weight=e1w)
-                            print n.edges()
+                            
                             
                             n.add_edge(e2[0],e1[1],weight=e2w)
-                            print n.edges()
+                            
                             n.remove_edge(e1[0],e1[1])
-                            print n.edges()
+                            
                             n.remove_edge(e2[0],e2[1])
                             
+                            #print 2,len(n.edges())
+                           
+                           
                             
-                           
-                           
-                            print n.edges()
                             break
                             
                     
@@ -105,12 +105,12 @@ while t<y:
 ##            print (e3[0],d)
 
 #begin next swap if the program can't find any matched edges
-            if i>y*4:
+            if i>y*10:
                 break
                 
-            print i
+            
 
-            if (e3[0],d) in n.edges() or (d,e3[0]) in n.edges():
+            elif (e3[0],d) in n.edges() or (d,e3[0]) in n.edges():
                 e4w=n[e3[0]][d]['weight']
 ##                print (e3[0],d),(d,e3[0])
                 
@@ -119,15 +119,24 @@ while t<y:
 ##                print (e3[1],e)
                 if (e3[1],e) in n.edges() or (e,e3[1])in n.edges():
                     e5w=n[e3[1]][e]['weight']
-                    if d!=e and d!=e3[1] and e!=e3[0] and (e3[0],e) not in n.edges() and (e3[1],d) not in n.edges():
+                    if d!=e and d!=e3[1] and e!=e3[0]:
+                        if (e3[0],e) not in n.edges() and (e3[1],d) not in n.edges():
+                            if (e,e3[0]) not in n.edges() and (d,e3[1]) not in n.edges():
+                                #
                         
                         
-##                      swapping edges
-                        n.add_edge(e3[0],e,weight=e4w)
-                        n.add_edge(e3[1],d,weight=e5w)
-                        n.remove_edge(e3[0],d)
-                        n.remove_edge(e3[1],e)
-                        break
+        ##                      swapping edges
+                                n.add_edge(e3[0],e,weight=e4w)
+##                                print n.edges()
+                                n.add_edge(e3[1],d,weight=e5w)
+##                                print n.edges()
+                                n.remove_edge(e3[0],d)
+##                                print n.edges()
+                                n.remove_edge(e3[1],e)
+##                                print n.edges()
+
+                               # print 1,len(n.edges())
+                                break
                         
                         
                         
