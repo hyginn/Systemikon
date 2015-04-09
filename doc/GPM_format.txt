@@ -1,2 +1,2 @@
-"Gene 1","Gene 2","Track", "Score"
-<string:gene>        <string:gene>        <int:track>        <float:value>
+"Gene Pair","Gene A","Gene B","Track", "Score"
+<int:gene>,<int:gene>,<string:track>,<float:value>

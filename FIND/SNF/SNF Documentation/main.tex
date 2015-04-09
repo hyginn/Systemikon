@@ -1,0 +1,52 @@
+%\include{appendix}
+
+
+\documentclass[doublespaced, 12pt]{article}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{float}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+\title{SNF Documentation}
+\author{Naveen Venayak}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This documentation describes the SNF package in the Systemikon workbench. This package is designed to generate synthetic data representing four distinct biological interaction data sets, fuse these into a single graph using SNF, and finally cluster the resulting graph.
+\end{abstract}
+
+\section{Introduction}
+Owing to the increasing number of biological databases containing diverse but related datatypes, simultaneous analysis of multiple data types can lead to improved prediction. Canonical methods for analyzing multiple data types was to cluster each type individually, and then compare results. However, this can often lead to conflicting conclusions. Alternative methods can be applied, such as concatenation of all data for analysis, but this tends to lead to a decreased signal to noise ration, which is a significant problem when analyzing biological data. 
+Thus, the SNF method was proposed. Using message-passing theory, SNF aims to iteratively fuse the graphs. From here, multiple clustering methods can be used, including spectral clustering.
+
+\section{Code Description}
+\subsection{Code overview}
+This code requires the SNF matlab code from \citep{Wang2014}. A functional R server is required to generate synthetic data; however, if synthetic data is not required this is not essential.
+
+The key additional functions are:
+\begin{itemize}
+	\item pWithinSearch \\ This function generates synthetic and iteratively generates new data sets with a range of pWithin values, to generate multigraphs with reduced connectivity. Then, the SNFpermutation function is called to determine cluster quality. Finally, the result is plotted.
+	\item SNFpermutation \\ This function requires a graph input of the following form: 
+	\begin{itemize}
+		\item an m x n matrix with m nodes and the m\textsuperscript{th} row defined as [geneA geneB iRefScore GEOScore GOScore pathWScore] for the m\textsuperscript{th} edge
+		\item groundTruth array which indicates the true cluster identity of each gene, each index representing the respective gene number 
+	\end{itemize} 
+\end{itemize}
+
+
+\subsection{Synthetic Data Generation}
+Synthetic data is generated using a common framework implemented by Prof. Boris Steipe and is detailed in the respective code file.
+\subsection{Similarity Network Fusion}
+
+\subsection{Spectral Clustering}
+
+\section{Example}
+\bibliographystyle{apa}
+\bibliography{C:/Users/Naveen/Documents/BibTeX/library}
+
+
+
+\end{document}

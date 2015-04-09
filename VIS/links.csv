@@ -1,0 +1,7 @@
+source,target,value
+gene1,gene2,0.91
+gene2,gene3,0.91
+gene3,gene5,0.99
+gene3,gene4,0.93
+gene4,gene5,0.99
+gene6,gene2,0.92
