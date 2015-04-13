@@ -1,4 +1,11 @@
-# Detect clusters in PPI graphs
+# Entropy-Based Graph Clustering (Weighted)
+# -----------------------------------------------
+# Based on the 2011 Data Mining (ICDM) Paper: 
+# "Entropy-Based Graph Clustering: Application to Biological and Social Networks"
+# -----------------------------------------------
+# The main idea here is that entropy-based clustering approach finds locally optimal clusters 
+# by growing a random seed in a manner that minimizes graph entropy. It has been found to be 
+# much better than competing means of graph clustering. 
 
 import sys
 from collections import defaultdict
@@ -8,7 +15,7 @@ DENSITY_THRESHOLD = 0.6
 AFFINITY_THRESHOLD = 0.3
 CLOSENESS_THRESHOLD = 0.6
 
-# id: protein with which another protein interacts
+# id: gene with which another gene interacts
 # w: the weight of the interaction
 class Interaction:
   def __init__(self, id, w):
@@ -23,10 +30,10 @@ fgeq = lambda a,b: (b - a) <= 1e-12
 # return the weighted degree of a node in a graph
 deg = lambda n: sum(x.w for x in n)
 
-# return average degree and density for a graph
+# returns average degree and density for a graph
 average_deg = lambda g: sum(deg(n) for n in g.itervalues()) / len(g)
 
-# return core nodes, given a graph and its average degree
+# returns core nodes, given a graph and its average degree
 get_core_nodes = lambda g,a: set(v for v,n in g.iteritems() if fgeq(deg(n), a))
 
 # return NA score
@@ -64,7 +71,7 @@ def core_removal(graph):
           subgraphs[i] |= subgraphs[j]
           subgraphs.pop(j)
         else:
-          j += 1
+      j += 1
       i += 1
     # recursive core removal
     for s in subgraphs:
@@ -164,8 +171,8 @@ def coach(filename):
         if d * len(sg) > d_i * len(SC[index]):
           SC[index] = sg
 
-  # step 2: adding peripheral proteins (not necessary for our purposes)
-  # print >> sys.stderr, 'adding peripheral proteins...'
+  # step 2: adding peripheral genes (not necessary for our purposes)
+  # print >> sys.stderr, 'adding peripheral genes...'
   # clusters = set()
   # for core in SC:
   #  nodes = frozenset(core)
