@@ -1,0 +1,14 @@
+# metadata goes here ... Fri Apr 24 13:39:38 2015
+Entrez	KEGG
+9314	NA
+7538	NA
+2353	NA
+2354	NA
+1843	NA
+10124	NA
+6281	NA
+3726	NA
+23645	NA
+1316	NA
+3725	NA
+
