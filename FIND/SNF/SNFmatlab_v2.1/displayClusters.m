@@ -31,8 +31,8 @@ if flag
     end
 end
 
-h = xlabel('Patients'); set(h,'FontSize',18);
+h = xlabel('Genes'); set(h,'FontSize',18);
 
-h = ylabel('Patients'); set(h,'FontSize',18);
+h = ylabel('Genes'); set(h,'FontSize',18);
 
 set(gca, 'FontSize',18)

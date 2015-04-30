@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.18)  7 APR 2015 11:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.18)  29 APR 2015 10:15
 entering extended mode
 **main.tex
 
-("C:\Users\Naveen\Documents\University\Grad School\University of Toronto\Course
-s\JTB 2020H - Computational Systems Biology\SNF Documentation\main.tex"
+("C:\Users\Naveen\Documents\GitHub\Systemikon\FIND\SNF\SNF Documentation\main.t
+ex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -138,8 +138,8 @@ LaTeX Warning: Unused global option(s):
     [doublespaced].
 
 
-("C:\Users\Naveen\Documents\University\Grad School\University of Toronto\Course
-s\JTB 2020H - Computational Systems Biology\SNF Documentation\main.aux")
+("C:\Users\Naveen\Documents\GitHub\Systemikon\FIND\SNF\SNF Documentation\main.a
+ux")
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
@@ -153,8 +153,7 @@ LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 \AtBeginShipoutBox=\box30
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count94
 \scratchdimen=\dimen107
@@ -188,29 +187,27 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 34.
 
-("C:\Users\Naveen\Documents\University\Grad School\University of Toronto\Course
-s\JTB 2020H - Computational Systems Biology\SNF Documentation\main.bbl")
-[2]
-("C:\Users\Naveen\Documents\University\Grad School\University of Toronto\Course
-s\JTB 2020H - Computational Systems Biology\SNF Documentation\main.aux") ) 
+("C:\Users\Naveen\Documents\GitHub\Systemikon\FIND\SNF\SNF Documentation\main.b
+bl") [2]
+("C:\Users\Naveen\Documents\GitHub\Systemikon\FIND\SNF\SNF Documentation\main.a
+ux") ) 
 Here is how much of TeX's memory you used:
  2808 strings out of 493921
- 39150 string characters out of 3144872
+ 38538 string characters out of 3144872
  99088 words of memory out of 3000000
  6097 multiletter control sequences out of 15000+200000
  9763 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,6n,39p,570b,189s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/P
-rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files 
-(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (2 pages, 100293 bytes).
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.
+pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pf
+b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on main.pdf (2 pages, 100483 bytes).
 PDF statistics:
  41 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -9,7 +9,7 @@ clc
 
 % First declare parameters
 nSystems_num = 32; %The number of systems for synthetic data generation
-nGenes = num2str(2000); %Number of genes for synthetic data generation
+nGenes_str = num2str(2000); %Number of genes for synthetic data generation
 pWithinValues = [0.001 0.005 0.01 0.02 0.03 0.04 0.05 0.1 0.2 0.4 0.8] %The values of pWithin to iterate over
 makeGPMmatrixLocation = 'source("C:/Users/Naveen/Documents/makeGPMmatrix.R")'; %Path for makeGPMmatrix
 
@@ -21,7 +21,7 @@ for i = pWithinValues
     %Prepare parameter for calling the R server
     nSystems = num2str(nSystems_num);
     pWithin = num2str(i);
-    Rinput = strcat('a <- makeGPMmatrix(nGenes=',nGenes,',','nSystems=',nSystems,',','pWithin=',pWithin,')');
+    Rinput = strcat('a <- makeGPMmatrix(nGenes=',nGenes_str,',','nSystems=',nSystems,',','pWithin=',pWithin,')');
 
     %Call the function in R and save the data to rawData
     evalR(makeGPMmatrixLocation);
