@@ -1,4 +1,7 @@
-# metadata goes here ... Fri Apr 24 13:39:38 2015
+# LoG Thu Apr 30 09:14:13 2015
+geneSetLabel: test_01
+geneSetDescription: Ten most highly coexpressed genes for human KLF4
+taxID: 9606
 Entrez	KEGG
 9314	NA
 7538	NA
