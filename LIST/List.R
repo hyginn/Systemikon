@@ -4,11 +4,14 @@
 #               numbers in LoG format.
 #          (ii) Read species identifier and output accession numbers
 #               for all genes in LoG format.
-# Version: 0.1
+# Version: 0.2
 # Date:    2015-04-24
 # Author:  Boris Steipe, based in part on code by Peter Boulos
 # 
-# Input:   Gene IDs or species name
+# Input:   Gene Symbols or taxID, one element per line.
+#          Comments allowed, prepend with #, optional
+#          taxID must be formatted as  taxID: 12345, mandatory
+#          Gene Symbols are read as strings, optional
 # Output:  LoG formatted list of accession numbers
 # Dependencies: - Uses API at http://biodbnet.abcc.ncifcrf.gov
 #                 see: http://biodbnet.abcc.ncifcrf.gov/webServices/RestWebService.php
@@ -16,10 +19,12 @@
 #               - CRAN package curl
 #
 # ToDo:  Define and write proper metadata
-# Notes:
+#        Figure out best way to get whole genome lists
+#        Add all unit tests
+# Notes: 
 # ==========================================================
 
-setwd("~/Documents/00.3.REFERENCE_AND_SUPPORT/Systemikon/git/Systemikon/LIST/")
+setwd(paste(SYSTEMIKONDIR, "/LIST", sep=""))
 
 # ====  PARAMETERS  ========================================
 
@@ -30,16 +35,20 @@ API <- "http://biodbnet.abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.js
 
 # ====  PACKAGES  =========================================
 
-if (!require(jsonlite)) {
+if (!require(jsonlite, quietly=TRUE)) {
 	install.packages("jsonlite")
 	library(jsonlite)
 }
 
-if (!require(RCurl)) {
+if (!require(RCurl, quietly=TRUE)) {
 	install.packages("RCurl")
 	library(RCurl)
 }
 
+if (!require(RUnit, quietly=TRUE)) {
+	install.packages("RUnit")
+	library(RUnit)
+}
 
 # ====  FUNCTIONS  =========================================
 
@@ -47,34 +56,52 @@ if (!require(RCurl)) {
 # source("~/My/Script/Directory/RDefaults.R")
 
 getTaxID <- function(dat) {
-	# extract taxID information from dat
-	# output is a string
-	id <- "9606"  # default: homo sapiens 
-	s <- dat[grep("taxID:", dat, ignore.case=TRUE), ]
+	# Extract mandatory taxID information from dat
+	# Output is a string
+	s <- dat[grep("taxID:", dat, ignore.case=TRUE)]
+	if (length(s) == 0) {
+		stop("No taxID record found in input.")
+	} else if (length(s) > 1) {
+		stop("Found more than one taxID record in input.")
+	}
 	id <- regmatches(s, regexpr("\\d+", s, perl=TRUE))
 	return <- id
 }
 
 stripMeta <- function(dat) {
-	# remove all rows that contain metadata, identified
-	# with a ":" in the row from a gene list
-	# output vector of unique symbols
-	return(unique(dat$symbol[-(grep(":", dat))]))
+	# Remove all elements that contain metadata, identified
+	#   with a ":" in the row, and all elements beginning with
+	#   a comment.
+	# Output vector of unique symbols or empty vector
+	meta <- grep(":", dat)
+	comments <- grep("^#", dat)
+	empty <- which(dat == "")
+	gl <- dat[-(c(meta, comments, empty))]
+	return(unique(gl))
 }
+
+getGenomeGenes <- function(taxID) {
+	# get all genes in the taxID genome
+	# TODO - best gene source is yet to be defined 
+
+	# dummy:
+	return(c("KLF4", "ZFP36", "FOS", 
+	         "FOSB", "DUSP1", "ARL4A", "S100A10", 
+             "JUNB", "PPP1R15A", "KLF6", "JUN"))
+}
+
 
 # ====  ANALYSIS  ==========================================
 
 
-raw <- read.csv(inFile,
-                stringsAsFactors=FALSE,
-                header=FALSE,
-                comment.char="#",
-                blank.lines.skip=TRUE,
-                col.names=c("symbol")
-                )
-
+raw <- readLines(inFile)
 taxID <- getTaxID(raw)
+
 geneList <- stripMeta(raw)
+
+if (length(geneList == 0) {
+    geneList <- getGenomeGenes(taxID)
+}
 
 RESTcall <- paste(API,
                   "method=dbfind",
@@ -84,7 +111,7 @@ RESTcall <- paste(API,
                   "&format=row",
                   sep="")
                   
-# Note: don't use fromJSON directly since it uses curl and gets
+# Note: don't use fromJSON() directly since it uses curl() and this gets
 # a 403(forbidden) error on the host. getURL() from the RCurl package
 # works.
 geneidList <- fromJSON(getURL(RESTcall))
@@ -117,6 +144,15 @@ data <- paste(data,
 
 
 write(data, file = outFile)
+
+
+# ====  TESTS  =============================================
+
+test_getTaxID <- function() {
+	checkEquals(getTaxID(c("taxID: 9606", "KLF4")), "9606")
+	checkException(getTaxID(c("ZFP36", "KLF4")), silent=TRUE)
+	checkException(getTaxID(c("taxID: 9606", "taxID: 9606")), silent=TRUE)
+}
 
 
 # [END]
