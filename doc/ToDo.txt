@@ -1,4 +1,10 @@
+
+
+
+
  - Review of R-package requirements for CRAN or Bioconductor
+   - pros and cons
+
 
  - LIST
    -  Refactoring for R (Done, but still stuff ToDo eg. whole
@@ -47,10 +53,16 @@
 
  - TIE/WEAVE
    - oK, for now.
-   - should review datamodel esp. re. metadata. 
-   - Using a particular DB crreates a dependency that we may not like. Is it better
+   - need to review datamodel esp. re. metadata. 
+   - need to add removeData() function to easily remove test data sets from
+     the DB (based on metadata)
+   - Using a particular DB creates a dependency that we may not like. Is it
      better to just create R-objects, dump them as .rda files and do all processing
-     in-memory?
+     in-memory? What would such a data object look like?
+   - best to add in-memory and in-DB data handling models to all functions
+     with a switch option in the arguments.
+   - we need to support sparse-matrix objetcs. See iGraph. We should probably construct
+     a sparse multigraph object
 
  - FIND 
    - review algorithms and results.
