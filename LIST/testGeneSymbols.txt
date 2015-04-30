@@ -15,9 +15,11 @@
 #      JUN       3725
 #
 
+geneSetLabel: test_01
+geneSetDescription: Ten most highly coexpressed genes for human KLF4 
 taxID: 9606
 
-KLF4
+KLF4         # reference
 ZFP36
 FOS
 FOSB
@@ -28,3 +30,4 @@ JUNB
 PPP1R15A
 KLF6
 JUN
+
