@@ -2,8 +2,8 @@
 #
 # Purpose: (i)  Read list of gene identifiers and output accession
 #               numbers in LoG format.
-#          (ii) Read species identifier and output accession numbers
-#               for all genes in LoG format.
+#          (ii) Read tax-ID and output accession numbers
+#               for all genes of genome in LoG format.
 # Version: 0.2
 # Date:    2015-04-24
 # Author:  Boris Steipe, based in part on code by Peter Boulos
@@ -53,31 +53,19 @@ if (!require(RUnit, quietly=TRUE)) {
 # ====  FUNCTIONS  =========================================
 
 # Define functions or source external files
-# source("~/My/Script/Directory/RDefaults.R")
+
+source(paste(SYSTEMIKONDIR, "/tools/utilityFunctions.R", sep=""))
+# contains getMetaData()
+# contains stripMetaData()
 
 getTaxID <- function(dat) {
 	# Extract mandatory taxID information from dat
 	# Output is a string
-	s <- dat[grep("taxID:", dat, ignore.case=TRUE)]
-	if (length(s) == 0) {
+	s <- getMetaData("taxID:\\s*(\\d+)", dat) 
+	if (s == "") {
 		stop("No taxID record found in input.")
-	} else if (length(s) > 1) {
-		stop("Found more than one taxID record in input.")
 	}
-	id <- regmatches(s, regexpr("\\d+", s, perl=TRUE))
-	return <- id
-}
-
-stripMeta <- function(dat) {
-	# Remove all elements that contain metadata, identified
-	#   with a ":" in the row, and all elements beginning with
-	#   a comment.
-	# Output vector of unique symbols or empty vector
-	meta <- grep(":", dat)
-	comments <- grep("^#", dat)
-	empty <- which(dat == "")
-	gl <- dat[-(c(meta, comments, empty))]
-	return(unique(gl))
+	return(s)
 }
 
 getGenomeGenes <- function(taxID) {
@@ -93,13 +81,16 @@ getGenomeGenes <- function(taxID) {
 
 # ====  ANALYSIS  ==========================================
 
-
 raw <- readLines(inFile)
+
 taxID <- getTaxID(raw)
+geneSetLabel <- getMetaData("geneSetLabel:\\s*(\\S+)", raw)
+geneSetDescription <- getMetaData("geneSetDescription:\\s*([^#]+)", raw)
 
-geneList <- stripMeta(raw)
+geneList <- stripMetaData(raw)
+rm(raw)  # clean up
 
-if (length(geneList == 0) {
+if (length(geneList) == 0) {
     geneList <- getGenomeGenes(taxID)
 }
 
@@ -129,9 +120,12 @@ outList <- fromJSON(getURL(RESTcall))
 
 outList <- sapply(outList, FUN = function(x) sub("-", NA, x))
 
-data <- paste("# metadata goes here ... ", 
+data <- paste("# LoG ", 
               date(),
               "\n",
+              "geneSetLabel: ", geneSetLabel, "\n",
+              "geneSetDescription: ", geneSetDescription, "\n",
+              "taxID: ", taxID, "\n",
               "Entrez\tKEGG\n",
               sep = "")
 data <- paste(data,
