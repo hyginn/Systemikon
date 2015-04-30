@@ -8,7 +8,7 @@ Currently there are two large databases that contain pathway information about g
 ####BioCyc Version (Testing, last updated March 13)
 *Current Issue(s): There is a low yield of BioCyc IDs (required) from Gene ID conversions.*
 ####Kegg Version (Running, version 0.1)
-*Current Issue(s): Have not addressed problem of multiple KEGG Gene IDs given for one Gene Symbol. Have not addressed problem of what to do if there is no KEGG Gene ID for a given Gene Symbol. Have not addressed problem of what to do if there is no Pathway annotated to a gene.
+*Current Issue(s): Have not addressed problem of multiple KEGG Gene IDs given for one Gene Symbol. Have not addressed problem of what to do if there is no KEGG Gene ID for a given Gene Symbol. Have not addressed problem of what to do if there is no Pathway annotated to a gene.*
 
 ## Methodology
 1. Genes are annotated with Pathways from Database(s): KEGG and/or BIOCYC

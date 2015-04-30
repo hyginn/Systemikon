@@ -1,0 +1,33 @@
+# Test genes for LIST: human gene symbols
+# Ten most highly coexpressed genes for human KLF4
+#  Gene symbols
+#    Gene    Entrez Gene ID    
+#     KLF4       9314
+#    ZFP36       7538
+#      FOS       2353
+#     FOSB       2354
+#    DUSP1       1843
+#    ARL4A      10124
+#  S100A10       6281
+#     JUNB       3726
+# PPP1R15A      23645
+#     KLF6       1316
+#      JUN       3725
+#
+
+geneSetLabel: test_01
+geneSetDescription: Ten most highly coexpressed genes for human KLF4 
+taxID: 9606
+
+KLF4         # reference
+ZFP36
+FOS
+FOSB
+DUSP1
+ARL4A
+S100A10
+JUNB
+PPP1R15A
+KLF6
+JUN
+

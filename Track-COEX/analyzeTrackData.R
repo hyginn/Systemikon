@@ -10,7 +10,7 @@
 # =====================
 
 PsetsFile <- "PearsonMar13list.dat"
-PrandFile <- "PearsonMar17list.dat"
+PrandFile <- "PearsonMar18list.dat"
 MICsetsFile <- "MICMar13list.dat"
 MICrandFile <- "MICMar17list.dat"
 
@@ -45,7 +45,7 @@ hist(MICrand$Val, n=20, col="#EEFFEE")
 par(op)
 
 # scatterplots of Pearson vs. MIC
-op <- par(mfrow = c(2, 1), pty="s")
+op <- par(mfrow = c(1, 2), pty="s")
 plot(abs(Psets$Val), MICsets$Val, cex=0.5, pch=16, col="#FF000033")
 plot(abs(Prand$Val), MICrand$Val, cex=0.5, pch=16, col="#0000FF33")
 par(op)

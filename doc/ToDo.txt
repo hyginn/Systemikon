@@ -1,0 +1,83 @@
+
+
+
+
+ - Review of R-package requirements for CRAN or Bioconductor
+   - pros and cons
+
+
+ - LIST
+   -  Refactoring for R (Done, but still stuff ToDo eg. whole
+        organism lists)
+   -  Define some gene sets for demo analysis
+        (True Positives: pre-curated systems,
+         "True" Negatives: random genes)
+ - COEX
+   - Review of code. 
+   - Review of source data. I think the tissue data set is not optimal.
+       Also, we don't have anything to work with non-human genes. The whole
+       mess of selecting from GEO is not really solved. There must be better
+       approaches.
+   - Normalization still needs to be addressed. There is new work by Terrence Speed
+     using factor analysis that looks interesting. He talked about it at the Fields
+     seminar that Hareem had told us about and you all didn't go to  ;-)
+     Essentially he believes that we CAN combine RNAseq and microarray data. If you
+     are interested, see e.g. http://www.ncbi.nlm.nih.gov/pubmed/25150836 
+   - MIC is too slow for large lists. Pearson is probably oK. Can we make
+     MIC substantially faster, and: is there actually a benefit of using MIC? (I.e.
+     have we shown that there are genes of interest with low Pearson and high MIC?
+     Can we perhaps compute a ROC curve to compare MIC and Pearson (from known true
+     positives)?
+
+ - INTERACT
+   - Massive code-review required.
+   - also: iRef has just released a DB update.
+   - How to deal with the source data? The MITAB file is 793MB. We will
+     need to figure out how to create the relevant subsets, organism specific,
+     and load them only on demand. How do other bioconductor packages solve this
+     problem.
+   - Weighting needs to be improved - in fact, we don't yet have a model of how to
+     make weights commensurable across tracts. 
+   - Interologs? Should we add them?
+
+ - PATHNE 
+   - still too few hits. I believe Richard is already thinking about how to improve
+     this.
+
+ - GOSEM
+   - I think we are pretty much oK here. But we might think about an improved
+    algorithm to calculate semantic similarity in constant time.
+   - Preprocessing of GOA data? 
+   - The same concern about data-file size as for iRef apply?
+   - What's a good strategy for updates? GOA is updated quite frequently...
+
+ - TIE/WEAVE
+   - oK, for now.
+   - need to review datamodel esp. re. metadata. 
+   - need to add removeData() function to easily remove test data sets from
+     the DB (based on metadata)
+   - Using a particular DB creates a dependency that we may not like. Is it
+     better to just create R-objects, dump them as .rda files and do all processing
+     in-memory? What would such a data object look like?
+   - best to add in-memory and in-DB data handling models to all functions
+     with a switch option in the arguments.
+   - we need to support sparse-matrix objetcs. See iGraph. We should probably construct
+     a sparse multigraph object
+
+ - FIND 
+   - review algorithms and results.
+   - potentially revise systems definition: do our clusters correspond to
+        our original definition.
+   - improve multigraph clustering in principle. Can we think of better approaches?
+   - define cluster quality criteria
+   - use (soft) hierarchical clustering
+ 
+ - STAT  TBD
+ - VIS  TBD
+
+ - ... add numeric output
+ - ... add sample runs.
+
+
+ - Open Topic: how to "name" Systems
+ - Open Topic : ontology of intra-system roles  

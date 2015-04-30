@@ -6,6 +6,8 @@ library(igraph)
 # The normalization used in this function utilizes the emprical cumulative distrubution function method
 # The reason for this normalization is to address the fact that multiple tracks can have scores within different ranges
 # The normalization resolves this problem and provides further ground for further graph fusion
+# This particular method of normalization is resistant to outliers, making it ideal when the real distrubution of the 
+# data is not known
 
 normalize <- function(address){
 
@@ -25,9 +27,12 @@ normalize <- function(address){
 
 }
 
-# This function fuses the graphs together based on the Shannon entropy
-# The reason for this fusion method is to address how consistant is the gene pair interaction scoe across different tracks
-# This also addresses the fact that if one of the track has a high score, the shannon will be low, hance the association is high
+# This function fuses the graphs together based on the harmonic mean of log of each entry
+# For a single row in the normalized table, the base 2 log of each entry is first obtained
+# The the harmonic mean of the log of each is computed and inserted into the resulting table
+# The in verse of the log scal can downscale the small values therefore minimizing their contribution.
+# By minizing the contribution of the small values, the large track scores are emphasized.
+# This therfore yields the most reasonable summary statistic
 
 fusion <- function(data, size){
   answer <- data.frame(gene_id1 = numeric(size), gene_id2 = numeric(size),
@@ -37,10 +42,31 @@ fusion <- function(data, size){
     answer[i,2] <- data[i,2]
     
     num <- c(data[i,3], data[i,4], data[i,5], data[i,6])
-    num <- num/sum(num)
-    answer[i,3] <- -sum(num*log2(num))
+    answer[i,3] <- 1/(mean(-1/log(num)))
   }
   return (answer)
+}
+
+# This function takes the ouput of the MCL function and writes the data into a file of user's choice
+# data: The output put of the MCL function
+# address: The string which represents the address of the file where the output should go
+#          If full path is not specified, then the file will be created in the current working directory
+
+write_results <- function(data, address){
+  
+  clusters = data$Cluster # Obtain the cluster data from the data fram output from the mcl function
+  size <- length(clusters) # Obtain the total number of genes
+  
+  data <- data.frame(gene_id = numeric(size), cluster_number=numeric(size)) # Initialize the data frame
+  
+  # Populate the data frame which the data from the clusters
+  for (i in 1:length(size)){
+    data[i,1] = i
+    data[i,2] = clusters[i]
+  }
+  
+  write.table(d, address) # Write the output
+  
 }
 
 normalized_table <- normalize("sample1.txt")
@@ -62,6 +88,8 @@ for (i in 1:length(data[,1])){
   data[i,2] <- new_index[toString(node2)]
 }
 
+#Populate the adjancency vector
+
 for (i in 1:length(data[,1])){
   node1 <- data[i,1]
   node2 <- data[i,2]
@@ -69,5 +97,11 @@ for (i in 1:length(data[,1])){
   adjacency_vector[(node2-1)*size + node1] = data[i,3]
 }
 
+#Convert the adjancency vector into adjancency matrix
 adjacency <- matrix(adjacency_vector, byrow=TRUE, nrow=size)
-clusters <- mcl(adjacency, addLoops=TRUE)
+
+# Values of expansion and inflation were carefully tested to give a reasonable number of clusters, the 
+# inflation semms to play a greater effect than the expansion parameter.
+clusters <- mcl(adjacency, expansion = 2.5, inflation = 1.75, addLoops=TRUE)
+
+write_results(clusters, "sample_output.txt")

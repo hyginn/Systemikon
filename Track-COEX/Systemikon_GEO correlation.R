@@ -43,11 +43,15 @@ rownames(exptable.EID)<-entrezid[rownames(exptable.EID),"Gene.ID"]
 test.gene<-as.character(read.csv("C:/Atom/BCB420/testgenes.csv", header=FALSE)[,1])
 exptable.interest<-exptable.EID[intersect(test.gene,rownames(exptable.EID)),]
 #exptable.interest<-exptable.EID
+#prorgress bar
+pb <- winProgressBar(title = "progress bar", min = 0,
+                     max = (nrow(exptable.interest)-1), width = 300)
 
 #Generate MIC for each gene pairs
 MIC.val<-NA
 GeneA<-NA
 GeneB<-NA
+ptm <- proc.time()
 for (i in 1:(nrow(exptable.interest)-1)) {
 	for (j in 1:(nrow(exptable.interest)-i)){
 		a<-mine(exptable.interest[i,],exptable.interest[i+j,])$MIC
@@ -55,7 +59,12 @@ for (i in 1:(nrow(exptable.interest)-1)) {
 		GeneA<-c(GeneA,rownames(exptable.interest)[i])
 		GeneB<-c(GeneB,rownames(exptable.interest)[i+j])
 		}
+	setWinProgressBar(pb, i, title=paste( round(i/(nrow(exptable.interest)-1)*100, 0),
+                                        "% done"))
 	}
+close(pb)
+proc.time() - ptm
+
 MIC.table<-cbind(GeneA,GeneB,MIC.val)[-1,]
 #write.table(MIC.table,"C:/Atom/BCB420/MICMar13list.txt", sep="\t")
 for (i in 1:nrow(MIC.table)){
@@ -96,9 +105,14 @@ for (i in 1:nrow(Pearson.table)){
 random.gene<-as.character(read.csv("C:/Atom/BCB420/randomgenes.csv", header=FALSE)[,1])
 exptable.random<-exptable.EID[intersect(random.gene,rownames(exptable.EID)),]
 #Generate MIC for each gene pairs
+#prorgress bar
+pb <- winProgressBar(title = "progress bar", min = 0,
+                     max = (nrow(exptable.interest)-1), width = 300)
+
 MIC.val.random<-NA
 GeneA<-NA
 GeneB<-NA
+ptm <- proc.time()
 for (i in 1:(nrow(exptable.random)-1)) {
 	for (j in 1:(nrow(exptable.random)-i)){
 		a<-mine(exptable.random[i,],exptable.random[i+j,])$MIC
@@ -106,7 +120,12 @@ for (i in 1:(nrow(exptable.random)-1)) {
 		GeneA<-c(GeneA,rownames(exptable.random)[i])
 		GeneB<-c(GeneB,rownames(exptable.random)[i+j])
 		}
+	setWinProgressBar(pb, i, title=paste( round(i/(nrow(exptable.interest)-1)*100, 0),
+                                        "% done"))
 	}
+close(pb)
+proc.time() - ptm
+
 MIC.table.random<-cbind(GeneA,GeneB,MIC.val.random)[-1,]
 for (i in 1:nrow(MIC.table.random)){
 	cat(MIC.table.random[i,"GeneA"],MIC.table.random[i,"GeneB"],MIC.table.random[i,"MIC.val.random"],file="C:/Atom/BCB420/MICMar17list.dat",sep="\t",append=TRUE)

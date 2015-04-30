@@ -1,0 +1,159 @@
+ID	Description
+GSM18865	Colorectal Adenocarc
+GSM18866	Colorectal Adenocarcinoma
+GSM18867	WHOLEBLOOD(JJV)
+GSM18868	WHOLEBLOOD(JJV)
+GSM18869	BM_CD33Myeloid
+GSM18870	BM_CD33Myeloid
+GSM18871	PB_CD14Monocytes
+GSM18872	PB_CD14Monocytes
+GSM18873	PB_BDCA4DentriticCells
+GSM18874	PB_BDCA4DentriticCells
+GSM18875	PB_CD56NKCells
+GSM18876	PB_CD56NKCells
+GSM18877	PB_CD4TCells
+GSM18878	PB_CD4TCells
+GSM18879	PB_CD8TCells
+GSM18880	PB_CD8TCells
+GSM18881	PB_CD19BCells
+GSM18882	PB_CD19BCells
+GSM18883	BM_CD105Endothelial
+GSM18884	BM_CD105Endothelial
+GSM18885	BM_CD34
+GSM18886	BM_CD34
+GSM18887	leukemia lymphoblastic (MOLT-4)
+GSM18888	leukemia lymphoblastic (MOLT-4)
+GSM18889	721_BLymphoblasts
+GSM18890	721_BLymphoblasts
+GSM18891	LymphomaRaji
+GSM18892	LymphomaRaji
+GSM18893	"leukemia, promyelocytic-HL-60"
+GSM18894	"leukemia, promyelocytic-HL-60"
+GSM18895	lymphomaburkittsDaudi
+GSM18896	lymphomaburkittsDaudi
+GSM18897	"leukemia, chronic Myelogenous K-562"
+GSM18898	"leukemia, chronic Myelogenous K-562"
+GSM18899	thymus
+GSM18900	thymus
+GSM18901	Tonsil
+GSM18902	Tonsil
+GSM18903	lymph node
+GSM18904	lymph node
+GSM18905	fetal liver
+GSM18906	fetal liver
+GSM18907	BM_CD71EarlyErythroid
+GSM18908	BM_CD71EarlyErythroid
+GSM18909	bone marrow
+GSM18910	bone marrow
+GSM18911	TemporalLobe
+GSM18912	TemporalLobe
+GSM18913	globus_pallidus
+GSM18914	globus_pallidus
+GSM18915	CerebellumPeduncles
+GSM18916	CerebellumPeduncles
+GSM18917	cerebellum
+GSM18918	cerebellum
+GSM18919	"brain, caudate nucleus"
+GSM18920	"brain, caudate nucleus"
+GSM18921	Whole Brain
+GSM18922	Whole Brain
+GSM18923	ParietalLobe
+GSM18924	ParietalLobe
+GSM18925	Medulla_Oblongata
+GSM18926	Medulla_Oblongata
+GSM18927	Brain Amygdala
+GSM18928	Brain Amygdala
+GSM18929	PrefrontalCortex
+GSM18930	PrefrontalCortex
+GSM18931	OccipitalLobe
+GSM18932	OccipitalLobe
+GSM18933	Hypothalamus
+GSM18934	Hypothalamus
+GSM18935	brainThalamus
+GSM18936	brainThalamus
+GSM18937	subthalamic_nucleus
+GSM18938	subthalamic_nucleus
+GSM18939	CingulateCortex
+GSM18940	CingulateCortex
+GSM18941	Pons
+GSM18942	Pons
+GSM18943	spinal cord
+GSM18944	spinal cord
+GSM18945	fetal brain
+GSM18946	fetal brain
+GSM18947	adrenal gland
+GSM18948	adrenal gland
+GSM18949	Lung
+GSM18950	Lung
+GSM18951	Heart
+GSM18952	Heart
+GSM18953	Liver
+GSM18954	Liver
+GSM18955	kidney
+GSM18956	kidney
+GSM18957	Prostate
+GSM18958	Prostate
+GSM18959	Uterus
+GSM18960	Uterus
+GSM18961	Thyroid
+GSM18962	Thyroid
+GSM18963	FetalThyroid
+GSM18964	FetalThyroid
+GSM18965	fetal lung
+GSM18966	fetal lung
+GSM18967	PLACENTA
+GSM18968	PLACENTA
+GSM18969	CardiacMyocytes
+GSM18970	CardiacMyocytes
+GSM18971	SmoothMuscle
+GSM18972	SmoothMuscle
+GSM18973	HBEC
+GSM18974	HBEC
+GSM18975	HUMANCULTUREDADIPOCYTE
+GSM18976	HUMANCULTUREDADIPOCYTE
+GSM18977	Pancreas
+GSM18978	Pancreas
+GSM18979	IsletCell
+GSM18980	IsletCell
+GSM18981	testis
+GSM18982	testis
+GSM18983	Testi_LeydigCell
+GSM18984	Testi_LeydigCell
+GSM18985	Testi_GermCell
+GSM18986	Testi_GermCell
+GSM18987	Testi_Intersitial
+GSM18988	Testi_Intersitial
+GSM18989	Testi_SeminiferousTubule
+GSM18990	Testi_SeminiferousTubule
+GSM18991	salivarygland
+GSM18992	salivarygland
+GSM18993	trachea
+GSM18994	trachea
+GSM18995	AdrenalCortex
+GSM18996	AdrenalCortex
+GSM18997	Ovary
+GSM18998	Ovary
+GSM18999	Appendix
+GSM19000	Appendix
+GSM19001	skin
+GSM19002	skin
+GSM19003	ciliary_ganglion
+GSM19004	ciliary_ganglion
+GSM19005	Trigeminal_Ganglion
+GSM19006	Trigeminal_Ganglion
+GSM19007	atrioventricular_node
+GSM19008	atrioventricular_node
+GSM19009	DRG
+GSM19010	DRG
+GSM19011	Superior_Cervical_Ganglion
+GSM19012	Superior_Cervical_Ganglion
+GSM19013	Skeletal_Muscle_Psoas
+GSM19014	Skeletal_Muscle_Psoas
+GSM19015	Uterus_Corpus
+GSM19016	Uterus_Corpus
+GSM19017	TONGUE
+GSM19018	TONGUE
+GSM19019	OlfactoryBulb
+GSM19020	OlfactoryBulb
+GSM19021	Pituitary
+GSM19022	Pituitary

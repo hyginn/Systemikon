@@ -1,5 +1,69 @@
-“Run Identifier”
+LIST input format definition
+V 1.1
+2015-04-30
+-------------------------------
 
-“Gene01”
-“Gene02”
-etc…
+
+The LIST format defines the input format to the Systemikon workflow.
+This is a plain text file.
+
+A program is expected to stop with error if more than one metadata
+record matching the same pattern is present.
+
+
+Mandatory records:
+
+  taxID: exactly one record required
+    Format:
+      taxID: <number>
+      taxID: <number>  # comment
+    Example:
+      taxID: 9606
+      taxID: 4932  # saccharomyces cerevisiae
+
+Optional records:
+
+  Comment:
+    Lines that start with "#" will be discarded
+    Format:
+      # <string>
+    Example:
+      # Random test input
+
+  Empty line:
+    Lines that have no contents will be discarded
+    Format:
+      NA
+
+  Gene set label:
+    Contains label that will be passed down the workflow.
+    Format:
+      geneSetLabel:\\s*(\\S+)
+      (string after keyword to first whitespace)
+    Example:
+      geneSetLabel: synth01
+
+  Gene set description:
+    Contains description that will be passed down the workflow.
+    Format:
+      geneSetDescription:\\s*([^#]+)
+      (string after keyword to comment or end_of_line)
+    Example:
+      geneSetDescription: Yeast test: 200 genes, 7 systems, 2 supersystems
+      geneSetDescription: Synthetic set: 1 gene, 2 systems  # Testcas
+
+  Gene symbol or ID:
+    the first element followed by whitespace on
+    a line that does not contain recognized metadata
+    or comment is assumed to be a gene symbol or
+    gene id.
+    This string must not contain ":" or "#".
+    Format:
+      ([^\s]+)
+      (string from start of line to first whitespace)
+    Example:
+      KLF4
+      9314  # entrez ID
+
+
+[END]
