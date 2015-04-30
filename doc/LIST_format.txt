@@ -1,16 +1,19 @@
 LIST input format definition
-V 1.0
-2015-04-29
+V 1.1
+2015-04-30
 -------------------------------
 
 
 The LIST format defines the input format to the Systemikon workflow.
 This is a plain text file.
 
+A program is expected to stop with error if more than one metadata
+record matching the same pattern is present.
+
+
 Mandatory records:
 
   taxID: exactly one record required
-    LIST will stop with error if not exactly one taxID record is present.
     Format:
       taxID: <number>
       taxID: <number>  # comment
@@ -35,7 +38,7 @@ Optional records:
   Gene set label:
     Contains label that will be passed down the workflow.
     Format:
-      geneSetLabel:\s*([^\s]+)
+      geneSetLabel:\\s*(\\S+)
       (string after keyword to first whitespace)
     Example:
       geneSetLabel: synth01
@@ -43,7 +46,7 @@ Optional records:
   Gene set description:
     Contains description that will be passed down the workflow.
     Format:
-      geneSetDescription:\s*([^#]+)
+      geneSetDescription:\\s*([^#]+)
       (string after keyword to comment or end_of_line)
     Example:
       geneSetDescription: Yeast test: 200 genes, 7 systems, 2 supersystems
@@ -54,6 +57,7 @@ Optional records:
     a line that does not contain recognized metadata
     or comment is assumed to be a gene symbol or
     gene id.
+    This string must not contain ":" or "#".
     Format:
       ([^\s]+)
       (string from start of line to first whitespace)
