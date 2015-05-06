@@ -33,6 +33,12 @@ if (! require(GOSemSim)) {
 	source("http://bioconductor.org/biocLite.R")
 	biocLite("GOSemSim")
 }
+
+# Load pbapply package or download it if not available (adds progress bar to apply function).
+if (! require(pbapply)) {
+  install.packages("pbapply")
+}
+
 entrezID <- LoGtable[,"Gene.ID"] #obtain EntrezIDs from List of Genes table
 blank.ind <- which(entrezID == "-") #which indices do not have an Entrez ID
 if(length(blank.ind != 0)){ #if there are blank Entrez IDs
@@ -47,7 +53,7 @@ genecombo <- t(combn(entrezID, m = 2)) #obtain every possible combination of 2 g
 colnames(genecombo)[1:2] <- c("GeneA", "GeneB") #Rename the first two columns for clarity
 
 print("Now calculating Cellular Component Semantic Similarity Scores...")
-CCscore <- apply(genecombo, 1, function(x){ #Calculate CC GO Semantic Similarity Scores over each row (1) of the matrix
+CCscore <- pbapply(genecombo, 1, function(x){ #Calculate CC GO Semantic Similarity Scores over each row (1) of the matrix
   CCSemSim <- geneSim(x[1], x[2], ont = "CC", organism = "human", measure = "Rel", combine = "BMA") #should return a vector of 3 elements
   if(length(CCSemSim) < 3){ #if a vector of a length < 3 is returned (ie. calculation fails due to lack of GO annotations)
     CC <- 0 #assign a CC score of 0
@@ -63,7 +69,7 @@ CCscore <- apply(genecombo, 1, function(x){ #Calculate CC GO Semantic Similarity
   }})
 
 print("Now calculating Biological Process Semantic Similarity Scores...")
-BPscore <- apply(genecombo, 1, function(x){ #Calculate BP GO Semantic Similarity Scores over each row (1) of the matrix
+BPscore <- pbapply(genecombo, 1, function(x){ #Calculate BP GO Semantic Similarity Scores over each row (1) of the matrix
   BPSemSim <- geneSim(x[1], x[2], ont = "BP", organism = "human", measure = "Rel", combine = "BMA")
   if(length(BPSemSim) < 3){ #if a vector of a length < 3 is returned (ie. calculation fails due to lack of GO annotations)
     BP <- 0 #assign a BP score of 0
